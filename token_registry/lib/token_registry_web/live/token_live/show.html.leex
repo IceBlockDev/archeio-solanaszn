@@ -1,0 +1,50 @@
+ <div class="pb-5 border-b border-gray-200 sm:pb-0">
+
+
+
+ <%= live_component @socket,
+           TokenRegistryWeb.TokenLive.TokenTabComponent,
+                token: @token %>
+
+                <span><%= live_patch "Edit", to: Routes.token_show_path(@socket, :edit, @token), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.token_index_path(@socket, :index) %></span>
+
+
+  <header class="bg-white shadow">
+    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+
+ <%= live_component @socket,
+           TokenRegistryWeb.TokenLive.TokenBasicComponent,
+                token: @token %>
+ </div>
+
+ </header>
+
+
+
+  <main>
+    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <%= live_component @socket,
+           TokenRegistryWeb.TokenLive.TokenChartComponent,
+                token: @token %>
+                </div>
+    <div>
+
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, TokenRegistryWeb.TokenLive.FormComponent,
+    id: @token.id,
+    title: @page_title,
+    action: @live_action,
+    token: @token,
+    return_to: Routes.token_show_path(@socket, :show, @token) %>
+<% end %>
+
+
+
+
+
+</div>
+
+
+</div>

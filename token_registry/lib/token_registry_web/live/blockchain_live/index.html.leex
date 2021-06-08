@@ -1,0 +1,37 @@
+<h1>Listing Blockchains</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, TokenRegistryWeb.BlockchainLive.FormComponent,
+    id: @blockchain.id || :new,
+    title: @page_title,
+    action: @live_action,
+    blockchain: @blockchain,
+    return_to: Routes.blockchain_index_path(@socket, :index) %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Symbol</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="blockchains">
+    <%= for blockchain <- @blockchains do %>
+      <tr id="blockchain-<%= blockchain.id %>">
+        <td><%= blockchain.name %></td>
+        <td><%= blockchain.symbol %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.blockchain_show_path(@socket, :show, blockchain) %></span>
+          <span><%= live_patch "Edit", to: Routes.blockchain_index_path(@socket, :edit, blockchain) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: blockchain.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Blockchain", to: Routes.blockchain_index_path(@socket, :new) %></span>

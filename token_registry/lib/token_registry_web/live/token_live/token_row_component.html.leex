@@ -1,0 +1,36 @@
+<tr id="token-<%= @token.id %>">
+    <td class="px-6 py-4 whitespace-nowrap">
+    <div class="flex items-center">
+        <div class="flex-shrink-0 h-10 w-10">
+
+        <img class="h-10 w-10 rounded-full" src="<%= if @token.icon_upload == nil, do: "/images/default_icon.png", else: @token.icon_upload  %>" alt="">
+        </div>
+        <div class="ml-4">
+        <div class="text-sm font-medium text-gray-900">
+            <%= live_redirect @token.symbol, to: Routes.token_show_path(@socket, :show, @token) %>
+        </div>
+        </div>
+    </div>
+    </td>
+    <td class="px-6 py-4 whitespace-nowrap">
+    <div class="text-sm text-gray-900"><%= @token.name %></div>
+    </td>
+    <td class="px-6 py-4 whitespace-nowrap">
+    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+       <%= if Map.get(@metadata, "supply") == 0, do: 0, else:  Map.get(@metadata, "stake") / Map.get(@metadata, "supply") %>
+    </span>
+    </td>
+
+    <td class="px-6 py-4 whitespace-nowrap">
+    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+        <%= if Map.get(@metadata, "supply") == 0, do: 0, else:  Map.get(@metadata, "supply") * 38.71 %>
+    </span>
+    </td>
+    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= Map.get(@metadata, "supply") %>
+    </td>
+    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%=  @chart %>
+    </td>
+
+</tr>

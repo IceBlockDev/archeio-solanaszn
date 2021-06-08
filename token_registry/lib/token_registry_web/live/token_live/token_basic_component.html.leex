@@ -1,0 +1,18 @@
+
+
+
+<div class="grid grid-cols-2 gap-4">
+  <div>
+      <%= live_component @socket,
+                TokenRegistryWeb.TokenLive.TokenHeaderComponent,
+                      token: @token %>
+</div>
+
+
+
+  <div>
+ <%= live_component @socket,
+           TokenRegistryWeb.TokenLive.TokenTickerComponent,
+                token: @token %>
+  </div>
+</div>

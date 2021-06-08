@@ -1,0 +1,27 @@
+<h1>Show Blockchain</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, TokenRegistryWeb.BlockchainLive.FormComponent,
+    id: @blockchain.id,
+    title: @page_title,
+    action: @live_action,
+    blockchain: @blockchain,
+    return_to: Routes.blockchain_show_path(@socket, :show, @blockchain) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @blockchain.name %>
+  </li>
+
+  <li>
+    <strong>Symbol:</strong>
+    <%= @blockchain.symbol %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.blockchain_show_path(@socket, :edit, @blockchain), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.blockchain_index_path(@socket, :index) %></span>

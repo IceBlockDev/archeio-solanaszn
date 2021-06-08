@@ -1,0 +1,86 @@
+<table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <%= live_component @socket,
+                  TokenRegistryWeb.TokenLive.TokenTableColumnComponent,
+                  sort: @sort,
+                  field: "symbol",
+                  name: "Ticker"
+                  %>
+               </th>
+    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <%= live_component @socket,
+                  TokenRegistryWeb.TokenLive.TokenTableColumnComponent,
+                  sort: @sort,
+                  field: "name",
+                  name: "Name"
+                  %>
+               </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                   <%= live_component @socket,
+                      TokenRegistryWeb.TokenLive.TokenTableColumnComponent,
+                      sort: @sort,
+                       field: "price",
+                      name: "Price"
+                    %>
+              </th>
+
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                   <%= live_component @socket,
+                      TokenRegistryWeb.TokenLive.TokenTableColumnComponent,
+                      sort: @sort,
+                      field: "market_cap",
+                      name: "Market Cap"
+                    %>
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                   <%= live_component @socket,
+                      TokenRegistryWeb.TokenLive.TokenTableColumnComponent,
+                      sort: @sort,
+                      field: "circulation",
+                      name: "Circulation"
+                    %>
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Price History
+
+              </th>
+
+              <th scope="col" class="relative px-6 py-3 text-right">
+
+              </th>
+
+            </tr>
+          </thead>
+
+          <tbody class="bg-white divide-y divide-gray-200">
+           <%= for token <- @pager.entries do %>
+           <%= live_component @socket,
+           TokenRegistryWeb.TokenLive.TokenRowComponent,
+                token: token,
+                metadata: Map.get(@metadata, token.metadata["mintAddress"])
+
+                %>
+          <% end %>
+            <!-- More people... -->
+          </tbody>
+          <tfoot>
+          <nav class="border-t border-gray-200">
+  <ul class="flex my-2">
+    <li class="">
+      <a class="px-2 py-2 <%= if @pager.page_number <= 1, do: "pointer-events-none text-gray-600" %>" href="#" phx-click="nav" phx-value-page="<%= @pager.page_number + 1 %>">Previous</a>
+    </li>
+<%= for idx <-  Enum.to_list(1..@pager.total_pages) do %>
+    <li class="">
+    <a class="px-2 py-2 <%= if @pager.page_number == idx, do: "pointer-events-none text-gray-600" %>" href="#" phx-click="nav" phx-value-page="<%= idx %>"><%= idx %></a>
+    </li>
+<% end %>
+    <li class="">
+      <a class="px-2 py-2 <%= if @pager.page_number >= @pager.total_pages, do: "pointer-events-none text-gray-600" %>" href="#" phx-click="nav" phx-value-page="<%= @pager.page_number + 1 %>">Next</a>
+    </li>
+  </ul>
+</nav>
+
+          </tfoot>
+        </table>

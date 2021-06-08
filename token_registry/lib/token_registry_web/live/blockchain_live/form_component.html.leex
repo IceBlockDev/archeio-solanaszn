@@ -1,0 +1,18 @@
+<h2><%= @title %></h2>
+
+<%= f = form_for @changeset, "#",
+  id: "blockchain-form",
+  phx_target: @myself,
+
+  phx_submit: "save" %>
+
+  <%= label f, :name %>
+  <%= text_input f, :name %>
+  <%= error_tag f, :name %>
+
+  <%= label f, :symbol %>
+  <%= text_input f, :symbol %>
+  <%= error_tag f, :symbol %>
+
+  <%= submit "Save", phx_disable_with: "Saving..." %>
+</form>
