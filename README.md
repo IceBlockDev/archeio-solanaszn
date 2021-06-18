@@ -40,7 +40,7 @@ De-Listing
 2. User receives collateral back to origination account.
 
 Usage
-1. Value asset - return price using value method, some will be semi-static (only change on epoch) and some will be dynamic (have a dex or exchange related price) - we can charge a fee here. For epoch driven, we need to update the value after epoch changes. @liron shimrony  we may want to put a redemption "hold" until value updated each epoch.
+1. Value asset - return price using value method, some will be semi-static (only change on epoch) and some will be dynamic (have a dex or exchange related price) - we can charge a fee here. For epoch driven, we need to update the value after epoch changes. @l we may want to put a redemption "hold" until value updated each epoch.
 2. View over time - feed data to a chart - to Lirons point, like coin market cap, can create candles or only show 1 data point for each x epochs when looking at large amounts of data.
 
 Additional usecases
